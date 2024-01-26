@@ -10,11 +10,21 @@ export const ACTIONS = {
 
 const TodoReducer = (state, action) => {
     const { type, payload } = action;
-    console.log("type:", type);
-    console.log("action:", action);
+    // console.log("type:", type);
+    // console.log("action:", action);
 
     switch (type) {
         case ACTIONS.ADD_TODO:
+            return {
+                ...state,
+                todos: payload.todo,
+            }
+        case ACTIONS.TOGGLE_TODO:
+            return {
+                ...state,
+                todos: payload.todo,
+            }
+        case ACTIONS.DELETE_TODO:
             return {
                 ...state,
                 todos: payload.todo,

@@ -18,9 +18,42 @@ export const TodoProvider = ({ children }) => {
         })
     }
 
+    const toggleTodo = (todoId) => {
+        const newTodo = state.todos.map((todo) => {
+            if (todo.id === todoId) {
+                return { ...todo, complete: !todo.complete }
+            }
+            return todo
+        })
+
+        dispatch({
+            type: ACTIONS.TOGGLE_TODO,
+            payload: {
+                todo: newTodo,
+            }
+        })
+    }
+
+    const deleteTodo = (todoId) => {
+        const newTodo = state.todos.filter((todo) => {
+            if (todo.id !== todoId) {
+                return { ...todo }
+            }
+        })
+
+        dispatch({
+            type: ACTIONS.DELETE_TODO,
+            payload: {
+                todo: newTodo
+            }
+        })
+    }
+
     const value = {
         todos: state.todos,
         addTodo,
+        toggleTodo,
+        deleteTodo,
     }
 
     return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>
